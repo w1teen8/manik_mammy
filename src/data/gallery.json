@@ -1,0 +1,19 @@
+[
+  { "id": 1, "category": "Манікюр", "src": "https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=1200&q=80", "alt": "Манікюр — робота Manik Mammy", "size": "tall" },
+  { "id": 2, "category": "Дизайн", "src": "https://images.unsplash.com/photo-1607779097040-26e80aa78e66?auto=format&fit=crop&w=1200&q=80", "alt": "Авторський дизайн нігтів", "size": "large" },
+  { "id": 3, "category": "Френч", "src": "https://images.unsplash.com/photo-1735264143075-9694eb02ad86?auto=format&fit=crop&w=1200&q=80", "alt": "Французький манікюр", "size": "normal" },
+  { "id": 4, "category": "Екстремальна довжина", "src": "https://images.unsplash.com/photo-1604902396830-aca29e19b067?auto=format&fit=crop&w=1200&q=80", "alt": "Екстремальна довжина нігтів", "size": "tall" },
+  { "id": 5, "category": "Манікюр", "src": "https://images.unsplash.com/photo-1610992015762-45dca7fa3a85?auto=format&fit=crop&w=1200&q=80", "alt": "Манікюр — робота Manik Mammy", "size": "normal" },
+  { "id": 6, "category": "Дизайн", "src": "https://images.unsplash.com/photo-1619607146034-5a05296c8f9a?auto=format&fit=crop&w=1200&q=80", "alt": "Авторський дизайн нігтів", "size": "wide" },
+  { "id": 7, "category": "Френч", "src": "https://images.unsplash.com/photo-1667207229735-266c430cca15?auto=format&fit=crop&w=1200&q=80", "alt": "Французький манікюр", "size": "tall" },
+  { "id": 8, "category": "Екстремальна довжина", "src": "https://images.unsplash.com/photo-1588359953494-0c215e3cedc6?auto=format&fit=crop&w=1200&q=80", "alt": "Екстремальна довжина нігтів", "size": "normal" },
+  { "id": 9, "category": "Манікюр", "src": "https://images.unsplash.com/photo-1690749138086-7422f71dc159?auto=format&fit=crop&w=1200&q=80", "alt": "Манікюр — робота Manik Mammy", "size": "large" },
+  { "id": 10, "category": "Дизайн", "src": "https://images.unsplash.com/photo-1612887390768-fb02affea7a6?auto=format&fit=crop&w=1200&q=80", "alt": "Авторський дизайн нігтів", "size": "normal" },
+  { "id": 11, "category": "Френч", "src": "https://images.unsplash.com/photo-1517837317028-6ce34fd27c34?auto=format&fit=crop&w=1200&q=80", "alt": "Французький манікюр", "size": "normal" },
+  { "id": 12, "category": "Екстремальна довжина", "src": "https://images.unsplash.com/photo-1633955726992-2b7c0d2d2a69?auto=format&fit=crop&w=1200&q=80", "alt": "Екстремальна довжина нігтів", "size": "wide" },
+  { "id": 13, "category": "Манікюр", "src": "https://images.unsplash.com/photo-1610992015732-2449b76344bc?auto=format&fit=crop&w=1200&q=80", "alt": "Манікюр — робота Manik Mammy", "size": "tall" },
+  { "id": 14, "category": "Дизайн", "src": "https://images.unsplash.com/photo-1571290274554-6a2eaa771e5f?auto=format&fit=crop&w=1200&q=80", "alt": "Авторський дизайн нігтів", "size": "normal" },
+  { "id": 15, "category": "Френч", "src": "https://images.unsplash.com/photo-1646335940123-b9008ebb358c?auto=format&fit=crop&w=1200&q=80", "alt": "Французький манікюр", "size": "normal" },
+  { "id": 16, "category": "Екстремальна довжина", "src": "https://images.unsplash.com/photo-1727468939344-44929b044076?auto=format&fit=crop&w=1200&q=80", "alt": "Екстремальна довжина нігтів", "size": "normal" },
+  { "id": 17, "category": "Манікюр", "src": "https://images.unsplash.com/photo-1643648855003-f536c436f399?auto=format&fit=crop&w=1200&q=80", "alt": "Манікюр — робота Manik Mammy", "size": "normal" }
+]

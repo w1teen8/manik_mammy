@@ -1,0 +1,23 @@
+[
+  {
+    "category": "Манікюр",
+    "items": [
+      { "name": "Комплекс S", "price": 700, "unit": "грн" },
+      { "name": "Комплекс M", "price": 1000, "unit": "грн" },
+      { "name": "Комплекс L", "price": 1200, "unit": "грн", "featured": true }
+    ]
+  },
+  {
+    "category": "Педикюр",
+    "items": [
+      { "name": "Комплекс S", "price": 600, "unit": "грн" },
+      { "name": "Комплекс M", "price": 800, "unit": "грн" }
+    ]
+  },
+  {
+    "category": "Екстремальна довжина",
+    "items": [
+      { "name": "1–7 довжина", "price": 2000, "unit": "грн" }
+    ]
+  }
+]
