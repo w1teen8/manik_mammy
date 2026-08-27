@@ -34,7 +34,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-bg/15" />
       </div>
 
-      <div className="container-lux relative z-10 flex flex-1 flex-col justify-center pb-28 pt-36 md:pt-40">
+      <div className="relative z-10 flex w-full flex-1 flex-col justify-center px-[clamp(1.25rem,5vw,5rem)] pb-28 pt-36 md:pt-40">
         <motion.span
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
