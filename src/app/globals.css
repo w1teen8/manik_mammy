@@ -196,8 +196,14 @@
 
   .container-lux {
     margin-inline: auto;
-    max-width: 1440px;
-    padding-inline: clamp(1.25rem, 5vw, 4rem);
+    max-width: 1600px;
+    padding-inline: clamp(1.25rem, 5vw, 5rem);
+  }
+
+  @media (min-width: 1920px) {
+    .container-lux {
+      max-width: 1680px;
+    }
   }
 
   .btn {

@@ -10,11 +10,9 @@ import reviews from "@/data/reviews.json";
 
 export default function Reviews() {
   const [index, setIndex] = useState(0);
-  const [dir, setDir] = useState(1);
   const hovering = useRef(false);
 
   const go = useCallback((d: 1 | -1) => {
-    setDir(d);
     setIndex((cur) => (cur + d + reviews.length) % reviews.length);
   }, []);
 
@@ -45,14 +43,13 @@ export default function Reviews() {
             aria-hidden="true"
           />
 
-          <AnimatePresence mode="wait" custom={dir}>
+          <AnimatePresence mode="wait">
             <motion.blockquote
               key={r.id}
-              custom={dir}
-              initial={{ opacity: 0, x: dir * 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: dir * -40 }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
               className="relative max-w-3xl"
             >
               <div className="flex gap-1" aria-label={`Оцінка ${r.rating} з 5`}>
@@ -96,10 +93,7 @@ export default function Reviews() {
                   type="button"
                   aria-label={`Відгук ${i + 1}`}
                   aria-current={i === index}
-                  onClick={() => {
-                    setDir(i > index ? 1 : -1);
-                    setIndex(i);
-                  }}
+                  onClick={() => setIndex(i)}
                   className={`h-1.5 rounded-full transition-all duration-300 ${
                     i === index ? "w-7 bg-champagne" : "w-1.5 bg-border-strong hover:bg-text-muted"
                   }`}

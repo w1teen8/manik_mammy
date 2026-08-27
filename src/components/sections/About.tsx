@@ -43,7 +43,7 @@ export default function About() {
               className="object-cover"
             />
           </div>
-          <div className="panel absolute -bottom-6 -right-4 hidden max-w-[13rem] flex-col gap-1 p-5 sm:flex lg:-right-10">
+          <div className="absolute -bottom-6 -right-4 hidden max-w-[13rem] flex-col gap-1 border border-border-strong bg-bg p-5 sm:flex lg:-right-10">
             <span className="font-display text-3xl text-milk">2016</span>
             <span className="text-[0.7rem] uppercase tracking-[0.16em] text-text-secondary">
               рік заснування студії

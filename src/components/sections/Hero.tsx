@@ -29,8 +29,9 @@ export default function Hero() {
           sizes="100vw"
           className="object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-bg via-bg/80 to-bg/25" />
-        <div className="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-bg/60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-bg from-5% via-bg/80 via-45% to-bg/25" />
+        <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/20 to-bg/55" />
+        <div className="absolute inset-0 bg-bg/15" />
       </div>
 
       <div className="container-lux relative z-10 flex flex-1 flex-col justify-center pb-28 pt-36 md:pt-40">
