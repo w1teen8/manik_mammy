@@ -1,58 +1,59 @@
 "use client";
 
-import { Sparkles, Flower2, Gem, Wand2, Palette, Moon, Zap, type LucideIcon } from "lucide-react";
+import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
-import RevealText from "@/components/ui/RevealText";
-import GlassCard from "@/components/ui/GlassCard";
-import servicesData from "@/data/services.json";
-
-const ICONS: Record<string, LucideIcon> = {
-  Sparkles,
-  Flower2,
-  Gem,
-  Wand2,
-  Palette,
-  Moon,
-  Zap,
-};
+import SectionHeading from "@/components/ui/SectionHeading";
+import { unsplash } from "@/lib/img";
+import services from "@/data/services.json";
 
 export default function Services() {
   return (
-    <section id="services" className="relative px-6 py-28 sm:px-10 lg:px-16 lg:py-40">
-      <div className="mx-auto max-w-[1440px]">
-        <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-end">
-          <div>
-            <Reveal>
-              <p className="mb-6 text-xs uppercase tracking-[0.35em] text-[#F3E7FF]">02 / Послуги</p>
-            </Reveal>
-            <RevealText
-              as="h2"
-              text={"Кожна послуга —\nритуал турботи."}
-              className="font-display text-4xl leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl"
-            />
-          </div>
-          <Reveal delay={0.2}>
-            <p className="max-w-sm text-[#B8B8B8]">
-              Від класики до сміливих рішень — обираємо підхід, який відповідає саме вашому стилю.
-            </p>
-          </Reveal>
-        </div>
+    <section id="services" className="section">
+      <div className="container-lux">
+        <SectionHeading
+          eyebrow="Послуги"
+          title={<>Догляд, що підкреслює тебе</>}
+          link={{ href: "#booking", label: "Переглянути всі послуги" }}
+        />
 
-        <div className="mt-16 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {servicesData.map((service, i) => {
-            const Icon = ICONS[service.icon] ?? Sparkles;
-            return (
-              <Reveal key={service.id} delay={(i % 3) * 0.1}>
-                <GlassCard className="h-full">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/[0.08] bg-white/[0.03] text-[#F3E7FF] transition-transform duration-500 group-hover:scale-110 group-hover:text-white">
-                    <Icon size={20} strokeWidth={1.5} />
+        <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {services.map((s, i) => (
+            <Reveal key={s.id} delay={i * 0.07}>
+              <a
+                href="#booking"
+                data-cursor-hover
+                className="group relative flex h-full flex-col overflow-hidden rounded-[4px] border border-border bg-surface transition-colors duration-500 hover:border-border-strong"
+              >
+                <div className="relative aspect-[4/5] overflow-hidden">
+                  <Image
+                    src={unsplash(s.image, 700, 78)}
+                    alt={`${s.title} — Manik Mammy`}
+                    fill
+                    loading="lazy"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    className="object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/20 to-transparent" />
+                </div>
+
+                <div className="flex flex-1 flex-col p-6">
+                  <h3 className="font-display text-2xl text-milk">{s.title}</h3>
+                  <p className="mt-2 flex-1 text-[0.82rem] leading-relaxed text-text-secondary">
+                    {s.description}
+                  </p>
+                  <div className="mt-6 flex items-center justify-between border-t border-border pt-4">
+                    <span className="text-[0.78rem] font-semibold uppercase tracking-[0.14em] text-champagne">
+                      {s.price}
+                    </span>
+                    <span className="grid h-9 w-9 place-items-center rounded-full border border-border-strong text-milk transition-all duration-300 group-hover:border-champagne group-hover:bg-champagne group-hover:text-bg">
+                      <ArrowUpRight size={15} />
+                    </span>
                   </div>
-                  <h3 className="mt-6 font-display text-xl text-white">{service.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-[#B8B8B8]">{service.description}</p>
-                </GlassCard>
-              </Reveal>
-            );
-          })}
+                </div>
+              </a>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>

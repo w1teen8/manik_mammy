@@ -1,61 +1,100 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { ShieldCheck, Diamond, Users, Coffee } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
-import RevealText from "@/components/ui/RevealText";
+import { unsplash } from "@/lib/img";
+
+const ADVANTAGES = [
+  {
+    icon: ShieldCheck,
+    title: "Безпека понад усе",
+    text: "Стерилізація інструментів у сухожаровій шафі та одноразові пилки для кожної клієнтки.",
+  },
+  {
+    icon: Diamond,
+    title: "Преміум матеріали",
+    text: "Використовуємо лише сертифіковані бренди гель-лаків, баз і топів із насиченим пігментом.",
+  },
+  {
+    icon: Users,
+    title: "Досвідчені майстри",
+    text: "Команда з профільною освітою, яка постійно вдосконалюється на профільних курсах.",
+  },
+  {
+    icon: Coffee,
+    title: "Атмосфера комфорту",
+    text: "Затишний простір, ароматна кава та музика — час, який хочеться проживати повільно.",
+  },
+];
 
 export default function About() {
   return (
-    <section id="about" className="relative px-6 py-28 sm:px-10 lg:px-16 lg:py-40">
-      <div className="mx-auto grid max-w-[1440px] items-center gap-14 lg:grid-cols-2 lg:gap-24">
-        <motion.div
-          initial={{ opacity: 0, scale: 1.08, filter: "blur(6px)" }}
-          whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-          viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
-          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-          className="relative aspect-[4/5] w-full overflow-hidden rounded-[28px]"
-        >
-          <Image
-            src="https://images.unsplash.com/photo-1566257584125-585d02c1fdd1?auto=format&fit=crop&w=1400&q=80"
-            alt="Про Manik Mammy"
-            fill
-            className="object-cover"
-            sizes="(max-width: 1024px) 100vw, 50vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#090909]/40 via-transparent to-transparent" />
-        </motion.div>
+    <section id="about" className="section">
+      <div className="container-lux grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+        <Reveal className="relative">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-[4px] border border-border">
+            <Image
+              src={unsplash("1600948836101-f9ffda59d250", 900, 80)}
+              alt="Інтерʼєр студії манікюру Manik Mammy"
+              fill
+              loading="lazy"
+              sizes="(max-width: 1024px) 100vw, 45vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="panel absolute -bottom-6 -right-4 hidden max-w-[13rem] flex-col gap-1 p-5 sm:flex lg:-right-10">
+            <span className="font-display text-3xl text-milk">2016</span>
+            <span className="text-[0.7rem] uppercase tracking-[0.16em] text-text-secondary">
+              рік заснування студії
+            </span>
+          </div>
+        </Reveal>
 
-        <div>
+        <div className="flex flex-col">
           <Reveal>
-            <p className="mb-6 text-xs uppercase tracking-[0.35em] text-[#F3E7FF]">01 / Про нас</p>
+            <span className="eyebrow block">Про нас</span>
+            <h2 className="display-hero mt-5 text-[clamp(2rem,5vw,3.7rem)] text-milk">
+              Тут створюють красу,{" "}
+              <span className="text-serif-italic gold-text">якій довіряють.</span>
+            </h2>
           </Reveal>
 
-          <RevealText
-            as="h2"
-            text={"Кожна деталь\nмає значення."}
-            className="font-display text-4xl leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl"
-          />
-
-          <Reveal delay={0.3} className="mt-8 max-w-lg space-y-5 text-lg leading-relaxed text-[#B8B8B8]">
-            <p>
-              <span className="text-white">MANIK MAMMY</span> — це місце, де кожна робота створюється індивідуально.
-            </p>
-            <p>
-              Ми працюємо лише якісними матеріалами, дотримуємося стерильності та створюємо дизайн, який підкреслює ваш стиль.
+          <Reveal delay={0.1}>
+            <p className="mt-7 max-w-xl text-[0.95rem] leading-relaxed text-text-secondary">
+              Manik Mammy — це студія, де естетика зустрічається з бездоганним
+              сервісом. Ми не робимо «просто нігті»: ми підбираємо форму, відтінок
+              і дизайн під твій стиль життя, працюємо делікатно й акуратно та
+              дбаємо про здоровʼя натуральної нігтьової пластини.
             </p>
           </Reveal>
 
-          <Reveal delay={0.45} className="mt-10 grid grid-cols-2 gap-6 border-t border-white/[0.08] pt-8 sm:max-w-md">
-            <div>
-              <p className="font-display text-2xl text-white">5+ років</p>
-              <p className="mt-1 text-xs uppercase tracking-[0.15em] text-[#B8B8B8]">досвіду роботи</p>
-            </div>
-            <div>
-              <p className="font-display text-2xl text-white">100%</p>
-              <p className="mt-1 text-xs uppercase tracking-[0.15em] text-[#B8B8B8]">стерильність</p>
-            </div>
+          <Reveal delay={0.16}>
+            <a href="#booking" data-cursor-hover className="btn btn-ghost mt-8 self-start">
+              Дізнатись більше
+            </a>
           </Reveal>
+
+          <div className="mt-12 grid gap-px overflow-hidden rounded-[4px] border border-border bg-border sm:grid-cols-2">
+            {ADVANTAGES.map((a, i) => (
+              <Reveal
+                key={a.title}
+                delay={0.1 + i * 0.06}
+                className="flex flex-col gap-3 bg-bg p-6"
+              >
+                <a.icon
+                  size={22}
+                  strokeWidth={1.3}
+                  className="text-champagne"
+                  aria-hidden="true"
+                />
+                <h3 className="font-display text-xl text-milk">{a.title}</h3>
+                <p className="text-[0.8rem] leading-relaxed text-text-secondary">
+                  {a.text}
+                </p>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>

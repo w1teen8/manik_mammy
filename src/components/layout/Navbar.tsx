@@ -3,14 +3,14 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import MagneticButton from "@/components/ui/MagneticButton";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
-  { href: "#hero", label: "Головна" },
+  { href: "#home", label: "Головна" },
   { href: "#services", label: "Послуги" },
-  { href: "#price", label: "Прайс" },
-  { href: "#gallery", label: "Галерея" },
+  { href: "#gallery", label: "Каталог дизайнів" },
+  { href: "#masters", label: "Майстри" },
+  { href: "#about", label: "Про нас" },
   { href: "#reviews", label: "Відгуки" },
   { href: "#contacts", label: "Контакти" },
 ];
@@ -20,7 +20,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -37,44 +37,54 @@ export default function Navbar() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-[80] transition-all duration-500",
-        scrolled ? "border-b border-white/[0.08] bg-[#090909]/70 backdrop-blur-xl" : "bg-transparent"
+        scrolled
+          ? "border-b border-border bg-bg/80 backdrop-blur-xl"
+          : "border-b border-transparent bg-transparent",
       )}
     >
-      <nav className="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-6 sm:px-10 lg:px-16">
-        <a href="#hero" data-cursor-hover className="font-display text-lg tracking-[0.15em] text-white">
-          MANIK MAMMY
+      <nav className="container-lux flex h-[4.75rem] items-center justify-between lg:h-20">
+        <a
+          href="#home"
+          data-cursor-hover
+          className="flex flex-col leading-none"
+          aria-label="Manik Mammy — на головну"
+        >
+          <span className="font-display text-xl tracking-[0.14em] text-milk">MANIK</span>
+          <span className="text-[0.58rem] font-medium tracking-[0.5em] text-champagne">
+            MAMMY
+          </span>
         </a>
 
-        <ul className="hidden items-center gap-9 lg:flex">
+        <ul className="hidden items-center gap-8 xl:flex">
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
                 data-cursor-hover
-                className="group relative text-sm tracking-wide text-[#B8B8B8] transition-colors duration-300 hover:text-white"
+                className="group relative text-[0.7rem] font-medium uppercase tracking-[0.16em] text-text-secondary transition-colors duration-300 hover:text-milk"
               >
                 {link.label}
-                <span className="absolute -bottom-1 left-0 h-px w-0 bg-[#F3E7FF] transition-all duration-300 group-hover:w-full" />
+                <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-champagne transition-all duration-300 group-hover:w-full" />
               </a>
             </li>
           ))}
         </ul>
 
-        <div className="hidden lg:block">
-          <MagneticButton
-            as="a"
-            href="#booking"
-            className="border border-white/15 bg-white text-[#090909] hover:bg-[#F3E7FF]"
-          >
-            Записатися
-          </MagneticButton>
-        </div>
+        <a
+          href="#booking"
+          data-cursor-hover
+          className="btn btn-solid hidden h-11 px-6 text-[0.68rem] xl:inline-flex"
+        >
+          Записатись
+        </a>
 
         <button
-          aria-label="Відкрити меню"
+          type="button"
+          aria-label={open ? "Закрити меню" : "Відкрити меню"}
+          aria-expanded={open}
           data-cursor-hover
           onClick={() => setOpen((v) => !v)}
-          className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white lg:hidden"
+          className="grid h-11 w-11 place-items-center rounded-full border border-border-strong text-milk xl:hidden"
         >
           {open ? <X size={18} /> : <Menu size={18} />}
         </button>
@@ -83,36 +93,36 @@ export default function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden border-t border-white/[0.08] bg-[#090909]/95 backdrop-blur-xl lg:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 top-[4.75rem] h-[calc(100dvh-4.75rem)] border-t border-border bg-bg xl:hidden"
           >
-            <ul className="flex flex-col gap-1 px-6 py-6">
+            <ul className="container-lux flex h-full flex-col gap-1 overflow-y-auto py-8">
               {NAV_LINKS.map((link, i) => (
                 <motion.li
                   key={link.href}
                   initial={{ opacity: 0, x: -16 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05, duration: 0.4 }}
+                  transition={{ delay: 0.05 + i * 0.045, duration: 0.4 }}
                 >
                   <a
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className="block rounded-2xl px-4 py-3 text-lg text-white/90 transition-colors hover:bg-white/[0.04]"
+                    className="block rounded-sm px-4 py-4 font-display text-2xl text-text-secondary transition-colors hover:text-milk"
                   >
                     {link.label}
                   </a>
                 </motion.li>
               ))}
-              <li className="mt-3 px-4">
+              <li className="mt-auto px-4 pt-6">
                 <a
                   href="#booking"
                   onClick={() => setOpen(false)}
-                  className="flex h-14 w-full items-center justify-center rounded-[18px] bg-white text-sm font-medium text-[#090909]"
+                  className="btn btn-solid w-full"
                 >
-                  Записатися
+                  Записатись
                 </a>
               </li>
             </ul>

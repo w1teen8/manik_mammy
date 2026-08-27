@@ -11,6 +11,8 @@ export default function CustomCursor() {
 
   useEffect(() => {
     const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    // Runs once on mount to gate a browser-only enhancement; safe cascading render.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setEnabled(canHover);
     if (!canHover) return;
 
@@ -74,10 +76,10 @@ export default function CustomCursor() {
         ref={ringRef}
         className={`fixed left-0 top-0 rounded-full border transition-[width,height,opacity,border-color] duration-300 ease-out ${
           hovering
-            ? "h-14 w-14 border-[#F3E7FF]/70 bg-[#F3E7FF]/[0.06]"
+            ? "h-14 w-14 border-[#E4D2B4]/70 bg-[#E4D2B4]/[0.06]"
             : "h-9 w-9 border-white/30 bg-transparent"
         }`}
-        style={{ willChange: "transform", boxShadow: hovering ? "0 0 30px rgba(243,231,255,0.25)" : "none" }}
+        style={{ willChange: "transform", boxShadow: hovering ? "0 0 30px rgba(228,210,180,0.25)" : "none" }}
       />
     </div>
   );

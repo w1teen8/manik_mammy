@@ -2,13 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { CalendarCheck } from "lucide-react";
+import { Calendar } from "lucide-react";
 
 export default function FloatingBookingButton() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > window.innerHeight * 0.7);
+    const onScroll = () => setVisible(window.scrollY > window.innerHeight * 0.8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -20,14 +20,14 @@ export default function FloatingBookingButton() {
         <motion.a
           href="#booking"
           data-cursor-hover
-          initial={{ opacity: 0, y: 30, scale: 0.9 }}
+          initial={{ opacity: 0, y: 24, scale: 0.92 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 30, scale: 0.9 }}
+          exit={{ opacity: 0, y: 24, scale: 0.92 }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed bottom-6 right-6 z-[70] flex items-center gap-2 rounded-[18px] bg-white px-5 py-4 text-sm font-medium text-[#090909] shadow-[0_10px_40px_rgba(0,0,0,0.5)] lg:hidden"
+          className="btn btn-solid fixed bottom-5 right-5 z-[70] h-13 px-5 text-[0.66rem] shadow-[0_12px_40px_rgba(0,0,0,0.55)] xl:hidden"
         >
-          <CalendarCheck size={17} />
-          Записатися
+          <Calendar size={15} />
+          Записатись
         </motion.a>
       )}
     </AnimatePresence>

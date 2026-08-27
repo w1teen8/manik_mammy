@@ -1,103 +1,130 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { Quote, Star, ChevronLeft, ChevronRight } from "lucide-react";
-import Reveal from "@/components/ui/Reveal";
-import RevealText from "@/components/ui/RevealText";
-import { cn } from "@/lib/utils";
-import reviewsData from "@/data/reviews.json";
+import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
+import SectionHeading from "@/components/ui/SectionHeading";
+import { unsplash } from "@/lib/img";
+import reviews from "@/data/reviews.json";
 
 export default function Reviews() {
   const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const [dir, setDir] = useState(1);
+  const hovering = useRef(false);
+
+  const go = useCallback((d: 1 | -1) => {
+    setDir(d);
+    setIndex((cur) => (cur + d + reviews.length) % reviews.length);
+  }, []);
 
   useEffect(() => {
-    if (paused) return;
-    const id = setInterval(() => setIndex((i) => (i + 1) % reviewsData.length), 5500);
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+    const id = setInterval(() => {
+      if (!hovering.current) go(1);
+    }, 7000);
     return () => clearInterval(id);
-  }, [paused]);
+  }, [go]);
 
-  const review = reviewsData[index];
-  const initials = review.name
-    .split(" ")
-    .map((w) => w[0])
-    .join("");
+  const r = reviews[index];
 
   return (
-    <section id="reviews" className="relative px-6 py-28 sm:px-10 lg:px-16 lg:py-40">
-      <div className="mx-auto max-w-[1440px]">
-        <Reveal>
-          <p className="mb-6 text-xs uppercase tracking-[0.35em] text-[#F3E7FF]">06 / Відгуки</p>
-        </Reveal>
-        <RevealText
-          as="h2"
-          text={"Слова, які\nговорять голосніше."}
-          className="font-display text-4xl leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl"
-        />
+    <section id="reviews" className="section">
+      <div className="container-lux">
+        <SectionHeading eyebrow="Відгуки" title={<>Що кажуть клієнтки</>} />
 
         <div
-          className="mt-16 mx-auto max-w-3xl"
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
+          className="relative mt-14 overflow-hidden rounded-[4px] border border-border bg-surface p-8 sm:p-14"
+          onMouseEnter={() => (hovering.current = true)}
+          onMouseLeave={() => (hovering.current = false)}
         >
-          <div className="glass relative min-h-[320px] overflow-hidden rounded-[28px] p-10 sm:p-14">
-            <Quote size={56} strokeWidth={1} className="text-[#F3E7FF]/30" />
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={review.id}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -16 }}
-                transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <div className="mt-4 flex gap-1">
-                  {Array.from({ length: review.rating }).map((_, i) => (
-                    <Star key={i} size={14} fill="#F3E7FF" className="text-[#F3E7FF]" />
-                  ))}
-                </div>
-                <p className="mt-6 text-balance text-xl leading-relaxed text-white sm:text-2xl">{review.text}</p>
-                <div className="mt-8 flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full border border-white/[0.1] bg-white/[0.04] font-display text-sm text-[#F3E7FF]">
-                    {initials}
-                  </div>
-                  <p className="text-sm text-[#B8B8B8]">{review.name}</p>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
+          <Quote
+            size={72}
+            className="absolute -top-2 right-6 text-champagne/10"
+            aria-hidden="true"
+          />
 
-          <div className="mt-8 flex items-center justify-between">
+          <AnimatePresence mode="wait" custom={dir}>
+            <motion.blockquote
+              key={r.id}
+              custom={dir}
+              initial={{ opacity: 0, x: dir * 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: dir * -40 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="relative max-w-3xl"
+            >
+              <div className="flex gap-1" aria-label={`Оцінка ${r.rating} з 5`}>
+                {Array.from({ length: r.rating }).map((_, i) => (
+                  <Star key={i} size={15} className="fill-champagne text-champagne" />
+                ))}
+              </div>
+
+              <p className="mt-6 font-display text-[clamp(1.5rem,3.2vw,2.3rem)] leading-snug text-milk">
+                «{r.text}»
+              </p>
+
+              <footer className="mt-8 flex items-center gap-4">
+                <span className="relative h-12 w-12 overflow-hidden rounded-full border border-border">
+                  <Image
+                    src={unsplash(r.avatar, 120, 70)}
+                    alt={r.name}
+                    fill
+                    loading="lazy"
+                    sizes="48px"
+                    className="object-cover"
+                  />
+                </span>
+                <span>
+                  <span className="block text-sm font-semibold tracking-wide text-milk">
+                    {r.name}
+                  </span>
+                  <span className="block text-[0.72rem] uppercase tracking-[0.14em] text-text-muted">
+                    {r.role}
+                  </span>
+                </span>
+              </footer>
+            </motion.blockquote>
+          </AnimatePresence>
+
+          <div className="mt-10 flex items-center justify-between">
             <div className="flex gap-2">
-              {reviewsData.map((r, i) => (
+              {reviews.map((rv, i) => (
                 <button
-                  key={r.id}
-                  data-cursor-hover
+                  key={rv.id}
+                  type="button"
                   aria-label={`Відгук ${i + 1}`}
-                  onClick={() => setIndex(i)}
-                  className={cn(
-                    "h-1.5 rounded-full transition-all duration-300",
-                    i === index ? "w-8 bg-white" : "w-1.5 bg-white/20"
-                  )}
+                  aria-current={i === index}
+                  onClick={() => {
+                    setDir(i > index ? 1 : -1);
+                    setIndex(i);
+                  }}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    i === index ? "w-7 bg-champagne" : "w-1.5 bg-border-strong hover:bg-text-muted"
+                  }`}
                 />
               ))}
             </div>
-            <div className="flex gap-2">
+
+            <div className="flex gap-3">
               <button
-                data-cursor-hover
+                type="button"
                 aria-label="Попередній відгук"
-                onClick={() => setIndex((i) => (i - 1 + reviewsData.length) % reviewsData.length)}
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/[0.08] text-white transition-colors hover:border-white/30 hover:bg-white/[0.06]"
+                data-cursor-hover
+                onClick={() => go(-1)}
+                className="grid h-11 w-11 place-items-center rounded-full border border-border-strong text-milk transition-colors duration-300 hover:border-champagne hover:text-champagne"
               >
-                <ChevronLeft size={16} />
+                <ChevronLeft size={18} />
               </button>
               <button
-                data-cursor-hover
+                type="button"
                 aria-label="Наступний відгук"
-                onClick={() => setIndex((i) => (i + 1) % reviewsData.length)}
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/[0.08] text-white transition-colors hover:border-white/30 hover:bg-white/[0.06]"
+                data-cursor-hover
+                onClick={() => go(1)}
+                className="grid h-11 w-11 place-items-center rounded-full border border-border-strong text-milk transition-colors duration-300 hover:border-champagne hover:text-champagne"
               >
-                <ChevronRight size={16} />
+                <ChevronRight size={18} />
               </button>
             </div>
           </div>
